@@ -1,20 +1,3 @@
- /**
- * Jeeliz Weboji - https://github.com/jeeliz/jeelizWeboji
- *
- * Copyright 2018 Jeeliz ( https://jeeliz.com )
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
-*/
 
 var JEEFACETRANSFERAPI=(function(){function ia(b){var d=new XMLHttpRequest;d.open("GET",a.Ta+a.save,!0);d.withCredentials=!1;d.onreadystatechange=function(){4===d.readyState&&200===d.status&&b(d.responseText)};d.send()}function va(){for(var b=a.yb,d=Array(b),e=0;e<b;++e)d[e]=0;return d}function ya(b,d,e){b=Math.min(Math.max((e-b)/(d-b),0),1);return b*b*(3-2*b)}function za(b,d,e){return Math.min(Math.max((e-b)/(d-b),0),1)}function Ba(b,d,e,g){return Math.pow(Math.min(Math.max((g-b)/(d-b),0),1),e)}
 function Da(b){switch(b){case "relu":return"gl_FragColor=max(vec4(0.,0.,0.,0.),gl_FragColor);";case "elu":return"gl_FragColor=mix(exp(-abs(gl_FragColor))-vec4(1.,1.,1.,1.),gl_FragColor,step(0.,gl_FragColor));";case "elu01":return"gl_FragColor=mix(0.1*exp(-abs(gl_FragColor))-vec4(0.1,0.1,0.1,0.1),gl_FragColor,step(0.,gl_FragColor));";case "arctan":return"gl_FragColor=atan(3.14159265359*texture2D(u0,vUV))/3.14159265359;";case "copy":return"";default:return!1}}

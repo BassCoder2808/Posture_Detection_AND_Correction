@@ -3,9 +3,9 @@ import secrets
 import urllib
 from PIL import Image
 from flask import render_template,url_for,flash,redirect,request,abort,jsonify,session
-from se_hackethon_project.forms import RegistrationForm,LoginForm,AccountUpdateForm,RequestResetForm,ResetPasswordForm,SuggestionForm
+from se_hackethon_project.forms import RegistrationForm,LoginForm,AccountUpdateForm,RequestResetForm,ResetPasswordForm,SuggestionForm,PostForm,HelpForm
 from se_hackethon_project import app,db,bcrypt,mail,oauth,google
-from se_hackethon_project.models import User
+from se_hackethon_project.models import User,Post,Feedback
 from flask_login import login_user,current_user,logout_user,login_required
 from flask_mail import Message
 from requests import get
@@ -187,3 +187,78 @@ def suggestions():
         flash('Thank you for your valuable feedback !!! We will surely try to improve','info')
         return redirect(url_for('home'))
     return render_template('suggestion.html',title='Suggestion Page',form=form)
+
+@app.route("/detect")
+@login_required
+def detect_posture():
+    return render_template('index.html')
+
+@app.route("/post/new",methods=['GET','POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            print(picture_file)
+            post = Post(title = form.title.data,content = form.content.data,author = current_user,image_file=picture_file)
+            db.session.add(post)
+            db.session.commit()
+        else:
+            print("yess")
+            post = Post(title = form.title.data,content = form.content.data,author = current_user)
+            db.session.add(post)
+            db.session.commit()
+        flash("Your post has been successfully created!!!",'success')
+        return redirect(url_for('all_posts'))
+    return render_template('create_post.html',title='New Post',form=form,legend="New Post")
+
+@app.route("/post/<int:post_id>")
+def post(post_id):
+    post = Post.query.get_or_404(post_id)
+    return render_template('post.html',title = post.title,post = post)
+
+
+@app.route("/post/<int:post_id>/update",methods=['GET','POST'])
+@login_required
+def update_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    form = PostForm()
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.content = form.content.data
+        db.session.commit()
+        flash("Your post has been updated!!",'success')
+        return redirect(url_for('post',post_id=post.id))
+    if request.method == "GET":
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('create_post.html',title='Update Post',form=form,legend="Update Post")
+
+
+@app.route("/post/<int:post_id>/delete",methods=['POST'])
+@login_required
+def delete_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if post.author != current_user:
+        abort(403)
+    db.session.delete(post)
+    db.session.commit()
+    flash("Your post has been deleted","success")
+    return redirect(url_for("all_posts"))
+
+@app.route("/posts")
+@login_required
+def all_posts():
+    page = request.args.get('page',1,type = int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page,per_page = 2)
+    return render_template('allPosts.html',posts=posts)
+
+@app.route("/user/<string:username>")
+def user_posts(username):
+    page = request.args.get('page',1,type = int)
+    user = User.query.filter_by(name = username).first_or_404()
+    posts = Post.query.filter_by(author=user).order_by(Post.date_posted.desc()).paginate(page=page,per_page = 2)
+    return render_template('user_posts.html',posts=posts,user=user)

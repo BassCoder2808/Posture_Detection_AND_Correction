@@ -1,7 +1,3 @@
-/**
- * Configuarable constants
- */
-
 const HEADPOSTURE_ROTATION_X_L_THRESHOLD = 0.3;
 const HEADPOSTURE_ROTATION_X_S_THRESHOLD = 0.0;
 const HEADPOSTURE_ROTATION_Y_THRESHOLD = 0.3;

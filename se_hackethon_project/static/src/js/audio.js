@@ -2,12 +2,10 @@ let audioContext, osc, lfo;
 
 function init_sound() {
 	try {
-		// Fix up for prefixing
 		window.AudioContext = window.AudioContext || window.webkitAudioContext;
 		audioContext = new AudioContext();
 
 		var real = new Float32Array([ 0, 0.4, 0.4, 1, 1, 1, 0.3, 0.7, 0.6, 0.5, 0.9, 0.8 ]);
-
 		var imag = new Float32Array(real.length);
 		var hornTable = audioContext.createPeriodicWave(real, imag);
 

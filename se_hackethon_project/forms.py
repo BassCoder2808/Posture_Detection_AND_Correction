@@ -67,5 +67,13 @@ class SuggestionForm(FlaskForm):
     submit = SubmitField('Submit Request')
 
 
+class PostForm(FlaskForm):
+    title = StringField('Title',validators=[DataRequired()])
+    content = TextAreaField('Content',validators = [DataRequired()])
+    picture = FileField('Upload Post Pic',validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
+    submit = SubmitField('Post')
 
-
+class HelpForm(FlaskForm):
+    title = StringField('Title',validators=[DataRequired()])
+    content = TextAreaField('Content',validators = [DataRequired()])
+    submit = SubmitField('Post')
