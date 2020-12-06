@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% block content %}
+  {% if current_user.is_authenticated %}
+    <h2>Welcome {{ current_user.name }}</h2>
+  {% else %}
+    <h2>Can you please login first ?</h2>
+  {% endif %}
+  <footer>
+    <p>©</p>
+  </footer>
+{% endblock content %}
