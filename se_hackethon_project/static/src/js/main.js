@@ -69,7 +69,7 @@ function nextFrame() {
 					messageContent += '<p>Head is turned too much.</p>';
 				}
 				if (!isHeadPostureOk[2]) {
-					messageContent += '<p>Head is bend towards sholders.</p>';
+					messageContent += '<p>Head is bend towards shoulders.</p>';
 				}
 				message.innerHTML = messageContent;
 			}
