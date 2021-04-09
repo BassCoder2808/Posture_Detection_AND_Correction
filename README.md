@@ -90,7 +90,7 @@ se_hackethon_project/static/src/js/audofile.type
 
 * Now when we click upon **Analyze Session** we have provided user with an interactive dashboard whenthey can see which are the most common errors they are commiting and can also print a report.
 
-        ![](https://github.com/BassCoder2808/Posture_Detection_AND_Correction/blob/main/Screenshots/13.png)
+    ![](https://github.com/BassCoder2808/Posture_Detection_AND_Correction/blob/main/Screenshots/13.png)
 
 
 ## Working
