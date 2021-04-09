@@ -5,6 +5,14 @@ let startAlgo = false;
 let lastClosedTime,continuous = false;
 let body = document.querySelector('body');
 let message;
+let x1=0;
+let x2=0;
+let x3=0;
+let x4=0;
+var let1 = document.getElementById("l1");
+var let2 = document.getElementById("l2");
+var let3 = document.getElementById("l3");
+var let4 = document.getElementById("l4");
 
 
 function main() {
@@ -60,16 +68,32 @@ function nextFrame() {
 			if (message) {
 				let messageContent = '';
 				if (!screenDistanceOK) {
-					messageContent += '<p>Getting too close to the Screen!!!</p>';
+					x1++;
+					var b = '<p>Getting too close to the Screen!!!</p>';
+					messageContent += b;
+					console.log(x1);
+					let1.value = x1;
 				}
 				if (!isHeadPostureOk[0]) {
-					messageContent += '<p>Head is either too up or too down.</p>';
+					x2++;
+					var c = '<p>Head is either too up or too down.</p>';
+					messageContent += c;
+					console.log(x2);
+					let2.value = x2;
 				}
 				if (!isHeadPostureOk[1]) {
-					messageContent += '<p>Head is turned too much.</p>';
+					x3++;
+					var d = '<p>Head is turned too much.</p>';
+					messageContent += d;
+					console.log(x3);
+					let3.value = x3;
 				}
 				if (!isHeadPostureOk[2]) {
-					messageContent += '<p>Head is bend towards shoulders.</p>';
+					x4++;
+					var e = '<p>Head is bend towards shoulders.</p>';
+					messageContent += e;
+					console.log(x4);
+					let4.value = x4;
 				}
 				message.innerHTML = messageContent;
 			}
@@ -92,3 +116,14 @@ function start() {
 	nextFrame();
 	document.getElementById('warnings').style.display = 'none';
 }
+
+// function graph() {
+// 	console.log(x1);
+// 	console.log(x2);
+// 	console.log(x3);
+// 	console.log(x4);
+// 	let1.value = x1;
+// 	let2.value = x2;
+// 	let3.value = x3;
+// 	let4.value = x4;
+// }

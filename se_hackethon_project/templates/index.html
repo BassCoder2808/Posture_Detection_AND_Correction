@@ -31,10 +31,22 @@
       <p>Head Left/Right Turn: <span id="y_rotate"></span></p>
       <p>Head Left/Right Bend towards shoulder: <span id="z_rotate"></span></p>
     </div>
+    <audio controls id="myAudio" hidden="true">
+      <source src="{{ url_for('static',filename='src/js/CantinaBand60.wav') }}" type="audio/wav">
+      Your browser does not support the audio tag.
+    </audio>
+    <!-- <a href="{{url_for('analyze_posture')}}" class="btn">Hello</a> -->
+    <!-- <button id="warning-button"><a href="{{url_for('analyze_posture')}}">Analyzie my position</a></button> -->
+    <form method="POST" action="/inspect">
+        <input type="text" id="l1" name="fname1" hidden="true" value="0"><br>
+        <input type="text" id="l2" name="fname2" hidden="true" value="0"><br>
+        <input type="text" id="l3" name="fname3" hidden="true" value="0"><br>
+        <input type="text" id="l4" name="fname4" hidden="true" value="0"><br>
+        <button id="warning-button" type="submit">Analyze my Session</button>
+    </form>
     <script src="{{ url_for('static',filename='src/js/jeelizFaceTransfer.js') }}"></script>
     <script src="{{ url_for('static',filename='src/js/posture.js') }}"></script>
     <script src="{{ url_for('static',filename='src/js/audio.js') }}"></script>
     <script src="{{ url_for('static',filename='src/js/main.js') }}"></script>
   </body>
 </html>
-
