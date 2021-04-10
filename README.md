@@ -4,7 +4,7 @@
 
 Website which is used to correct the posture of the user sitting in front of their screen even when the process is running in the background with voice alerts
 
-* THe deployed website can be seen [here](https://posturecorrection.herokuapp.com/)
+* The deployed website can be seen [here](https://posturecorrection.herokuapp.com/)
 
 ## Table Of Contents:
 
